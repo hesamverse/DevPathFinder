@@ -1,6 +1,10 @@
 import json
 import difflib
 
+def ask_fun_mode():
+    choice = input("🃏 Do you want to activate FUN mode? (yes/no): ").strip().lower()
+    return choice == "yes"
+
 # Load role data
 def load_roles(filepath):
     with open(filepath, "r") as file:
@@ -55,10 +59,22 @@ def match_role_fuzzy(user_traits, roles_data):
     return best_role, role_scores[best_role]
 
 # Show learning path and role description
-def show_path(role, roles_data, paths_data):
-    print(f"\n🔍 Suggested role: {role.upper()}")
-    print(f"{roles_data[role]['description']}\n")
-    print("📘 Recommended Learning Path:")
+def show_path(role, roles_data, paths_data, fun_mode=False):
+    if fun_mode:
+        jokes = {
+            "backend": "You’re the silent warrior. People don’t see your work, but nothing runs without you.",
+            "frontend": "You probably spend 80% of your time fixing that one pixel that’s off.",
+            "security": "You don't trust your own toaster. And you’re probably right."
+        }
+        print(f"\n🕶️ FUN MODE ENABLED")
+        print(f"🎭 Your vibe is: {role.upper()}")
+        print(f"{jokes[role]}\n")
+        print("📚 But seriously, here's a learning path in case you stop joking:")
+    else:
+        print(f"\n🔍 Suggested role: {role.upper()}")
+        print(f"{roles_data[role]['description']}\n")
+        print("📘 Recommended Learning Path:")
+    
     for step in paths_data[role]:
         print(f"  - {step}")
 
@@ -66,13 +82,14 @@ def show_path(role, roles_data, paths_data):
 def main():
     roles_data = load_roles("data/roles.json")
     paths_data = load_paths("data/paths.json")
+    fun_mode = ask_fun_mode()
     user_traits = get_user_input()
     best_role, score = match_role_fuzzy(user_traits, roles_data)
-    
+
     if score == 0:
         print("\nSorry, we couldn't identify your traits. Try again with different words.")
     else:
-        show_path(best_role, roles_data, paths_data)
+        show_path(best_role, roles_data, paths_data, fun_mode)
 
 if __name__ == "__main__":
     main()
