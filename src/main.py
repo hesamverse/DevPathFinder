@@ -20,17 +20,17 @@ def get_user_input():
     return [trait.strip().lower() for trait in user_input.split(",")]
 
 # Fuzzy match each user input against known keywords
-def fuzzy_match_keywords(user_traits, roles_data, threshold=0.7):
-    matched_traits = []
-    all_keywords = {
-        role: roles_data[role]["keywords"] for role in roles_data
-    }
+def fuzzy_match_keywords_weighted(user_traits, roles_data, threshold=0.7):
+    role_scores = {role: 0 for role in roles_data}
+
     for trait in user_traits:
-        for role, keywords in all_keywords.items():
-            match = difflib.get_close_matches(trait, keywords, n=1, cutoff=threshold)
-            if match:
-                matched_traits.append((match[0], role))
-    return matched_traits
+        for role, data in roles_data.items():
+            keywords = data["keywords"]
+            for keyword, weight in keywords.items():
+                match = difflib.get_close_matches(trait, [keyword], n=1, cutoff=threshold)
+                if match:
+                    role_scores[role] += weight
+    return role_scores
 
 # Match user input to roles
 def match_role(user_traits, roles_data):
@@ -44,8 +44,9 @@ def match_role(user_traits, roles_data):
 
 # Show learning path
 def match_role_fuzzy(user_traits, roles_data):
-    role_scores = {role: 0 for role in roles_data}
-    matches = fuzzy_match_keywords(user_traits, roles_data)
+    scores = fuzzy_match_keywords_weighted(user_traits, roles_data)
+    best_role = max(scores, key=scores.get)
+    return best_role, scores[best_role]
 
     for keyword, role in matches:
         role_scores[role] += 1
