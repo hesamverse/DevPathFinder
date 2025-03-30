@@ -1,21 +1,32 @@
 {
-    "backend": [
-      "Learn Python or Node.js",
-      "Understand SQL and relational databases like PostgreSQL",
-      "Learn how APIs and REST work",
-      "Practice data structures and algorithms"
-    ],
-    "frontend": [
-      "Master HTML and CSS",
-      "Learn JavaScript deeply",
-      "Pick a frontend framework like React or Vue",
-      "Practice responsive and user-friendly design"
-    ],
-    "security": [
-      "Learn networking and OS fundamentals",
-      "Use Python for scripting and automation",
-      "Understand web vulnerabilities like XSS and SQL injection",
-      "Practice with platforms like HackTheBox or CTF challenges"
-    ]
-  }
-  
+  "backend": [
+    "Learn Python or Node.js",
+    "Understand SQL and relational databases like PostgreSQL",
+    "Study how APIs and RESTful systems work",
+    "Learn Object-Oriented Programming (OOP)",
+    "Practice problem-solving and data structures",
+    "Understand server environments and deployments",
+    "Learn Docker basics",
+    "Explore testing and CI/CD concepts"
+  ],
+  "frontend": [
+    "Master HTML and CSS",
+    "Learn JavaScript deeply",
+    "Get familiar with responsive design and accessibility",
+    "Choose a frontend framework (React, Vue, etc.)",
+    "Understand state management and routing",
+    "Explore design tools like Figma",
+    "Learn animation and transitions in CSS/JS",
+    "Practice converting designs to code"
+  ],
+  "security": [
+    "Learn networking fundamentals and OS internals",
+    "Master Linux command line and scripting",
+    "Understand OWASP Top 10 vulnerabilities",
+    "Explore web hacking (XSS, SQLi, CSRF, etc.)",
+    "Use tools like Burp Suite, Nmap, Wireshark",
+    "Practice on HackTheBox, TryHackMe, CTF platforms",
+    "Study reverse engineering and binary exploitation",
+    "Dive into smart contract auditing if interested in Web3"
+  ]
+}
