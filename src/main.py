@@ -43,10 +43,11 @@ def fuzzy_match_keywords_weighted(user_traits, roles_data, threshold=0.7):
     return role_scores
 
 # Match user traits to role
-def match_role_fuzzy(user_traits, roles_data):
+def match_roles_with_scores(user_traits, roles_data):
     scores = fuzzy_match_keywords_weighted(user_traits, roles_data)
-    best_role = max(scores, key=scores.get)
-    return best_role, scores[best_role]
+    sorted_roles = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    best_role = sorted_roles[0][0]
+    return best_role, sorted_roles
 
 # Print fun comebacks based on user traits
 def fun_comebacks(user_traits, fun_dict):
@@ -55,6 +56,21 @@ def fun_comebacks(user_traits, fun_dict):
         for key in fun_dict:
             if difflib.get_close_matches(trait, [key], n=1, cutoff=0.8):
                 print(f"  - {fun_dict[key]}")
+
+def ranked_fun_jokes(sorted_roles, fun_mode):
+    if not fun_mode:
+        return
+    print("\n🎭 Role Rankings (with fun):")
+    for role, score in sorted_roles:
+        if score == 0:
+            continue
+        if score >= 6:
+            reaction = f"🔥 {role.upper()} - You're born for this! Like a duck to water."
+        elif score >= 3:
+            reaction = f"😎 {role.upper()} - You kinda fit in... but still have some homework to do."
+        else:
+            reaction = f"🤔 {role.upper()} - Hmmm... you sure about this?"
+        print(f"  {reaction} (score: {score})")
 
 # Show learning path and description
 def show_path(role, roles_data, paths_data, fun_mode=False):
@@ -83,13 +99,15 @@ def main():
     fun_dict = load_funlines("data/funlines.json")
     fun_mode = ask_fun_mode()
     user_traits = get_user_input()
-    best_role, score = match_role_fuzzy(user_traits, roles_data)
+    best_role, sorted_roles = match_roles_with_scores(user_traits, roles_data)
 
-    if score == 0:
+    if sorted_roles[0][1] == 0:
         print("\nSorry, we couldn't identify your traits. Try again with different words.")
     else:
         if fun_mode:
             fun_comebacks(user_traits, fun_dict)
+            ranked_fun_jokes(sorted_roles, fun_mode)
+
         show_path(best_role, roles_data, paths_data, fun_mode)
 
 if __name__ == "__main__":
