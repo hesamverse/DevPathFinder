@@ -1,0 +1,21 @@
+{
+    "backend": [
+      "Learn Python or Node.js",
+      "Understand SQL and relational databases like PostgreSQL",
+      "Learn how APIs and REST work",
+      "Practice data structures and algorithms"
+    ],
+    "frontend": [
+      "Master HTML and CSS",
+      "Learn JavaScript deeply",
+      "Pick a frontend framework like React or Vue",
+      "Practice responsive and user-friendly design"
+    ],
+    "security": [
+      "Learn networking and OS fundamentals",
+      "Use Python for scripting and automation",
+      "Understand web vulnerabilities like XSS and SQL injection",
+      "Practice with platforms like HackTheBox or CTF challenges"
+    ]
+  }
+  

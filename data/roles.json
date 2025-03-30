@@ -1,0 +1,14 @@
+{
+    "backend": {
+      "keywords": ["analytical", "organized", "precise", "database lover", "optimization", "python enthusiast"],
+      "description": "Backend is the backbone of systems. If you enjoy building logic and working behind the scenes, this is your path."
+    },
+    "frontend": {
+      "keywords": ["creative", "visual", "detail-oriented", "design lover", "html", "css", "react"],
+      "description": "Frontend is what the user sees. If you care about aesthetics and user experience, frontend is your stage."
+    },
+    "security": {
+      "keywords": ["curious", "suspicious", "accurate", "bug hunter", "ctf", "ethical hacker"],
+      "description": "Security is about finding loopholes. If you think like a detective and enjoy uncovering weaknesses, this is your path."
+    }
+}  
